@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  adf-scan:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2026-03-10T22:15:34.039519054Z"
+    description: Automatic document feeder scanner daemon
+    digest: 1ef96cbb34b6c7e4cea56b0352a6d3a5911f4b583f3f981c2febb42d3a74e667
+    name: adf-scan
+    type: application
+    urls:
+    - https://github.com/jarvis-haus/adf-scan/releases/download/adf-scan-0.1.0/adf-scan-0.1.0.tgz
+    version: 0.1.0
+generated: "2026-03-10T22:15:34.039535274Z"
