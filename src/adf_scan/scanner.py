@@ -43,7 +43,7 @@ class ScannerDaemon:
 
     def _do_scan(self) -> None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        logger.info("Paper detected in ADF, starting scan...")
+        logger.info("Paper detected in ADF, starting scan (source: %s)...", self.config.scan_source)
 
         job_url = self.client.create_scan_job(
             resolution=self.config.scan_resolution,

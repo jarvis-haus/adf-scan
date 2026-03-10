@@ -16,6 +16,8 @@ def main() -> None:
     )
 
     config = Config.from_env()
+    log = logging.getLogger(__name__)
+    log.info("Duplex scanning %s", "enabled" if config.scan_duplex else "disabled")
     daemon = ScannerDaemon(config)
 
     def handle_signal(signum: int, frame: object) -> None:
