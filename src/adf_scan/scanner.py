@@ -49,6 +49,7 @@ class ScannerDaemon:
                 else:
                     logger.debug("Printer still unreachable: %s", exc)
                 backoff = min(backoff * 2, 300.0)
+                logger.debug("Next retry in %.0fs", backoff)
             except Exception:
                 logger.exception("Unexpected error")
                 backoff = self.config.poll_interval
