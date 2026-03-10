@@ -1,0 +1,33 @@
+image:
+  repository: "jarvishaus/adf-scan"  # Required: e.g. yourdockerhubuser/adf-scan
+  tag: ""         # Defaults to appVersion
+  pullPolicy: IfNotPresent
+
+scanner:
+  # Required: eSCL base URL of your scanner
+  # e.g. https://192.168.1.100:443/eSCL
+  url: ""
+  pollInterval: "5"
+  resolution: "300"
+  colorMode: "RGB24"
+  duplex: "false"
+
+persistence:
+  enabled: true
+  storageClass: ""
+  size: 10Gi
+  accessModes:
+    - ReadWriteOnce
+  # Use an existing PVC instead of creating one
+  existingClaim: ""
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    cpu: 500m
+    memory: 256Mi
+
+nodeSelector: {}
+tolerations: []

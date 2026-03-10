@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "adf-scan.fullname" . }}
+  labels:
+    {{- include "adf-scan.labels" . | nindent 4 }}
+data:
+  SCANNER_URL: {{ required "scanner.url is required" .Values.scanner.url | quote }}
+  SCAN_DIR: "/scans"
+  POLL_INTERVAL: {{ .Values.scanner.pollInterval | quote }}
+  SCAN_RESOLUTION: {{ .Values.scanner.resolution | quote }}
+  SCAN_COLOR_MODE: {{ .Values.scanner.colorMode | quote }}
+  SCAN_DUPLEX: {{ .Values.scanner.duplex | quote }}

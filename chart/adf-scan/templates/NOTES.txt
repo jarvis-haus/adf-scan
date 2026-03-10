@@ -1,0 +1,13 @@
+ADF Scanner daemon has been deployed.
+
+Scanner URL: {{ .Values.scanner.url }}
+Poll interval: {{ .Values.scanner.pollInterval }}s
+Resolution: {{ .Values.scanner.resolution }} DPI
+Color mode: {{ .Values.scanner.colorMode }}
+
+Scanned PDFs are stored at /scans inside the container.
+{{- if .Values.persistence.enabled }}
+A PersistentVolumeClaim is backing the /scans directory.
+{{- else }}
+WARNING: Persistence is disabled. Scans will be lost on pod restart.
+{{- end }}
