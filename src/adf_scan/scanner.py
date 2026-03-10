@@ -25,19 +25,35 @@ class ScannerDaemon:
         )
         self.config.scan_dir.mkdir(parents=True, exist_ok=True)
 
+        offline = False
+        backoff = self.config.poll_interval
+
         while not self._stop.is_set():
             try:
                 if self.client.adf_has_paper():
+                    if offline:
+                        logger.info("Printer is back online")
+                        offline = False
+                        backoff = self.config.poll_interval
                     self._do_scan()
                     continue  # re-poll immediately after a scan
+                if offline:
+                    backoff = self.config.poll_interval
             except ScannerBusyError:
                 logger.info("Scanner is busy, will retry")
+                backoff = self.config.poll_interval
             except ESCLError as exc:
-                logger.warning("Scanner communication error: %s", exc)
+                if not offline:
+                    logger.warning("Printer unreachable: %s — will keep retrying", exc)
+                    offline = True
+                else:
+                    logger.debug("Printer still unreachable: %s", exc)
+                backoff = min(backoff * 2, 300.0)
             except Exception:
                 logger.exception("Unexpected error")
+                backoff = self.config.poll_interval
 
-            self._stop.wait(timeout=self.config.poll_interval)
+            self._stop.wait(timeout=backoff)
 
         logger.info("Scanner daemon stopped")
 
