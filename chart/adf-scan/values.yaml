@@ -29,5 +29,9 @@ resources:
     cpu: 500m
     memory: 256Mi
 
+securityContext:
+  runAsUser: 65534
+  fsGroup: 65534
+
 nodeSelector: {}
 tolerations: []

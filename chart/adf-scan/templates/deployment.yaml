@@ -26,8 +26,8 @@ spec:
       {{- end }}
       securityContext:
         runAsNonRoot: true
-        runAsUser: 65534
-        fsGroup: 65534
+        runAsUser: {{ .Values.securityContext.runAsUser }}
+        fsGroup: {{ .Values.securityContext.fsGroup }}
       containers:
         - name: {{ .Chart.Name }}
           image: {{ include "adf-scan.image" . }}
