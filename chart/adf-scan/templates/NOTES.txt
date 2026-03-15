@@ -1,4 +1,4 @@
-ADF Scanner daemon has been deployed.
+ADF Scanner has been deployed.
 
 Scanner URL: {{ .Values.scanner.url }}
 Poll interval: {{ .Values.scanner.pollInterval }}s
